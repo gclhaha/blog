@@ -14,4 +14,6 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
+.vscodenode_modules
+.temp
+.cache
