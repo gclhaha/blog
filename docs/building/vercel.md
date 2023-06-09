@@ -14,12 +14,12 @@ Vercel 的前端部署功能非常强大，它支持各种前端框架，如 Rea
 
 还可以使用提供的模板，快速的创建一个新的项目。Vercel 会自动为你的项目创建一个 GitHub 仓库，并将其部署到 Vercel 的服务器上。你可以在 Vercel 的仪表板上查看你的项目，并进行管理。
 
-![模板入口](./public/template-index.png)
+![模板入口](./public/vercel-template-index.png)
 
 
 Vercel 还提供了一种名为"Serverless Functions"的功能，允许开发者在前端项目中添加服务器端的逻辑。这些函数会在 Vercel 的服务器上运行，无需开发者管理任何服务器。
 
-![模板首页](./public/template-main.png)
+![模板首页](./public/vercel-template-main.png)
 
 ### 如何使用 Vercel 进行前端部署
 
@@ -30,8 +30,12 @@ Vercel 还提供了一种名为"Serverless Functions"的功能，允许开发者
 
 你可以在 Vercel 的[官方文档](https://vercel.com/docs)中找到更详细的步骤。
 
+> *重点：可免费部署*
+
+![收费模式](./public/vercel-pricing.png)
+
 ## 为什么选择 Vercel
 
 Vercel 的目标是让前端部署变得更简单、更快。无论你是一个独立开发者，还是一个大型企业，Vercel 都可以满足你的需要。它让你可以将更多的精力放在代码的编写上，而不是部署的细节。
 
-*注：本项目部署在vercel*
+> *注：本项目部署在vercel*
