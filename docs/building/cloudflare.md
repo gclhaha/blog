@@ -13,6 +13,8 @@ Cloudflare 的 [DNS 服务](https://developers.cloudflare.com/dns/) 是全球最
 ![DNS](./public/cloudflare-dns.png)
 
 我们在Vercel上部署的网站，vercel会提供一个专属的vercel的域名，但是国内无法访问，不过我们可以设置域名，并根据提示绑定到Cloudflare上，这样就可以轻松愉快的使用自定义的域名访问了。我的主域名是gclhaha.top，博客项目设置的子域名是blog.gclhaha.top，就可以通过blog.gclhaha.top访问博客了。
+![vercel domain](./public/vercel-domain.png)
+<center>Vercel的域名设置页面</center>
 
 ### 关联文章
 [Vercel：前端部署托管平台](./vercel.md)
