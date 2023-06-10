@@ -45,7 +45,7 @@ public volatile int compareTo(Object obj) {
 ```
 
 如有错误，欢迎指正
-## 主要参考文章
+## 参考链接
 [Java 中泛型的实现原理](https://www.cnblogs.com/robothy/p/13949788.html)
 
 
