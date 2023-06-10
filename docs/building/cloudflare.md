@@ -12,6 +12,10 @@ Cloudflare 的 [DNS 服务](https://developers.cloudflare.com/dns/) 是全球最
 
 ![DNS](./public/cloudflare-dns.png)
 
+我们在Vercel上部署的网站，vercel会提供一个专属的vercel的域名，但是国内无法访问，不过我们可以设置域名，并根据提示绑定到Cloudflare上，这样就可以轻松愉快的使用自定义的域名访问了。我的主域名是gclhaha.top，博客项目设置的子域名是blog.gclhaha.top，就可以通过blog.gclhaha.top访问博客了。
+
+### 关联文章
+[Vercel：前端部署托管平台](./vercel.md)
 ## Workers
 
 [Cloudflare Workers](https://developers.cloudflare.com/workers/) 是一个轻量级的JavaScript执行环境，允许开发者在Cloudflare的边缘网络上运行代码。这意味着您可以在离用户最近的地方运行代码，从而实现无与伦比的性能和响应速度。Cloudflare Workers支持使用WebAssembly，允许在浏览器外运行高性能的二进制代码。
