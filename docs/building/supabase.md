@@ -2,13 +2,14 @@
 
 大家好，今天我要为大家介绍一款超级强大的开源工具——Supabase。很多人把Supabase称为开源的Firebase，这是因为它提供了类似于Firebase的功能，但是以一个完全开源的方式。在这篇文章中，我将主要关注Supabase的免费功能，并向您介绍如何使用它们。
 
-![Supabase Logo](https://supabase.io/new/images/logo-dark.png)
 
 ## Supabase 是什么？
 
 [Supabase](https://supabase.io/) 是一个开源的 Firebase 替代品。它提供了一整套的开发工具和功能，以帮助开发者快速构建和扩展他们的应用。Supabase 的主要功能包括数据库管理、实时订阅、用户认证和存储管理等。
 
 ## Supabase 的免费功能
+
+![supabase-pricing](./public/supabase-pricing.png)
 
 下面是 Supabase 提供的一些主要的免费功能：
 
