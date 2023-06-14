@@ -20,6 +20,8 @@
 
 [Google AdSense：广告放置服务，构建你的被动收入](./building/adsense.md)
 
+[Replit: 全新的在线编程环境](./building/replit.md)
+
 ## Golang
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
