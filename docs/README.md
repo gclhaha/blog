@@ -29,3 +29,7 @@
 ## IOS
 
 [使用cocoapods管理第三方库](./ios/cocoapods.md)
+
+## AI
+
+[AI使用指南](./ai/ai-guide.md)
