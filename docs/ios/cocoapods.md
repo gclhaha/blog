@@ -25,7 +25,7 @@ sudo gem update --system
 执行后耐心等待，时间可能会比较长，大概几分钟时间。
 
 刷新配置
-    
+
 ```bash
 source ~/.bash_profile
 ```
@@ -35,6 +35,7 @@ source ~/.bash_profile
 ```bash
 sudo gem install cocoapods
 ```
+
 执行此步骤之前，需要跟换gem源，不然会提示安装失败，可以使用下面的命令进行更换
 
 ```bash
@@ -79,7 +80,7 @@ end
 
 在`# Pods for your-project`下面添加需要的第三方库，例如添加`Sqlite.swift`，在`# Pods for your-project`下面添加
 
-```bash 
+```bash
 pod 'SQLite.swift', '~> 0.12.2'
 ```
 
@@ -105,9 +106,4 @@ sudo vim /etc/hosts
 185.199.108.133 raw.githubusercontent.com
 ```
 
-
 [cocoapods官网](https://cocoapods.org/)
-
-
-
-
