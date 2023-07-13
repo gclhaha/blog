@@ -1,4 +1,6 @@
 import { defineUserConfig } from 'vuepress'
+import { inject } from '@vercel/analytics';
+inject();
 
 export default defineUserConfig({
   lang: 'zh-CN',
