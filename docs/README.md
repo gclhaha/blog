@@ -33,3 +33,7 @@
 ## AI
 
 [AI使用指南](./ai/ai-guide.md)
+
+[购买chatGPT plus的历程](./ai/chatGPT-plus-guide.md)
+
+[通过chatGPT IOS订阅plus](./ai/subscribe-by-ios.md)
