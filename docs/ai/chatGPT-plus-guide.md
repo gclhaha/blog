@@ -20,7 +20,7 @@
 https://www.cnouyi.care/cn
 这是一个数字货币平台，可以下载客户端、网页、app进行交易操作。移动端如果使用的是ios系统，需要将app store地址换成美国，地址可以用（https://www.meiguodizhi.com/ ）生成一个。我这里用的是客户端，也可以进行充值，转账操作。
 
-- 购买25个USDT（是一种约等价于美元的虚拟货币），用于转给Depay的卡内
+- 购买25个USDT（是一种约等价于美元的虚拟货币），用于转给Depay的卡内 
 
 ![image](./public/gpt-okx.png)
 
