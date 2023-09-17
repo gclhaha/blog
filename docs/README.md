@@ -2,7 +2,7 @@
 
 ## [视频内容提取AI工具](https://ai-tool.gclhaha.top)
 
-## [Bug地狱] (./bughell/01.md)
+## [Bug地狱](./bughell/01.md)
 
 ## 关于构建 构建被动收入
 
