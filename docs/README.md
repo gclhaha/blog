@@ -2,7 +2,9 @@
 
 ## [视频内容提取AI工具](https://ai-tool.gclhaha.top)
 
-## [Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
+## 代码之路
+
+[Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
 
 ## 关于构建 构建被动收入
 
@@ -25,6 +27,8 @@
 [Replit: 全新的在线编程环境](./building/replit.md)
 
 [Github Action：自动化构建你的应用](./building/githubaction.md)
+
+[Github Action + Docker Hub: 容器化自动构建你的应用](./building/dockerhub.md)
 
 ## Golang
 
