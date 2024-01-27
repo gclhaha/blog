@@ -47,3 +47,7 @@
 [购买chatGPT plus的历程](./ai/chatGPT-plus-guide.md)
 
 [通过chatGPT IOS订阅plus](./ai/subscribe-by-ios.md)
+
+## 踩坑
+
+[MongoDB 字段中数据类型不一致序列化异常排查与处理](./bug/mongdb-var-data-type-different.md)
