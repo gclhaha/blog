@@ -40,3 +40,42 @@ docker run -d --name kafka --network kafka-network \
 ```
 
 在这个命令中，KAFKA_HEAP_OPTS 环境变量用于限制 Kafka 使用的 JVM 堆内存大小。
+
+## 使用docker compose
+
+创建一个docker compose文件，名称为 docker-compose-kafka-dev.yml
+
+```bash
+version: '3'
+
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - kafka-network
+
+  kafka:
+    image: bitnami/kafka:latest
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_HEAP_OPTS=-Xmx512M -Xms512M
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    driver: bridge
+
+```
+
+```bash
+docker compose -f docker-compose-kafka-dev.yml up -d
+```
