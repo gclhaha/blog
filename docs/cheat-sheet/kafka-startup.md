@@ -41,7 +41,7 @@ docker run -d --name kafka --network kafka-network \
 
 在这个命令中，KAFKA_HEAP_OPTS 环境变量用于限制 Kafka 使用的 JVM 堆内存大小。
 
-## 使用Docker Compose
+## 使用Docker Compose 启动
 
 使用 Docker Compose 的优点之一就是它管理了网络和服务之间的依赖关系，使得整个过程更加简洁和自动化。
 
@@ -84,7 +84,7 @@ networks:
 docker compose -f docker-compose-kafka-dev.yml up -d
 ```
 
-### 创建topic
+## 创建topic
 
 进入容器
 
