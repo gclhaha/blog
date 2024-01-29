@@ -38,16 +38,20 @@
 
 ## IOS
 
-[使用cocoapods管理第三方库](./ios/cocoapods.md)
+[使用Cocoapods管理第三方库](./ios/cocoapods.md)
 
 ## AI
 
 [AI使用指南](./ai/ai-guide.md)
 
-[购买chatGPT plus的历程](./ai/chatGPT-plus-guide.md)
+[购买ChatGPT plus的历程](./ai/chatGPT-plus-guide.md)
 
-[通过chatGPT IOS订阅plus](./ai/subscribe-by-ios.md)
+[通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)
 
 ## 踩坑
 
 [MongoDB 字段中数据类型不一致序列化异常排查与处理](./bug/mongdb-var-data-type-different.md)
+
+## CheatSheet
+
+[搭建Kafka测试环境](./cheat-sheet/kafka-startup.md)
