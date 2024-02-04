@@ -52,6 +52,8 @@
 
 [MongoDB 字段中数据类型不一致序列化异常排查与处理](./bug/mongdb-var-data-type-different.md)
 
+[Mybatis PageHelper 异常 attempted to return null from a method with a primitive return type (long) 问题分析](./bug/mybatis-pagehelper.md)
+
 ## CheatSheet
 
 [搭建Kafka测试环境](./cheat-sheet/kafka-startup.md)
