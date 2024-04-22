@@ -1,7 +1,5 @@
 # gclhaha的博客
 
-## [视频内容提取AI工具](https://ai-tool.gclhaha.top)
-
 ## Bug地狱
 
 [Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
