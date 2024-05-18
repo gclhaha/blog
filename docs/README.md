@@ -55,3 +55,7 @@
 ## CheatSheet
 
 [搭建Kafka测试环境](./cheat-sheet/kafka-startup.md)
+
+## 随笔
+
+[第一期：关于面瘫的体验](./eaasy/weekly-1.md)
