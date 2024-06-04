@@ -20,6 +20,6 @@
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/HomebrewUninstall.sh)"
 ```
 
-转自：[Homebrew国内如何自动安装（国内地址）（Mac OS）](https://www.zhihu.com/tardis/bd/art/111014448?source_id=1001)
+转自：[Homebrew国内如何自动安装（国内地址）（Mac OS）](https://zhuanlan.zhihu.com/p/111014448/)
 
 感恩❤️
