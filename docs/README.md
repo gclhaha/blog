@@ -34,9 +34,11 @@
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
 
-## IOS
+## Apple
 
-[使用Cocoapods管理第三方库](./ios/cocoapods.md)
+[使用Cocoapods管理第三方库](./apple/cocoapods.md)
+
+[Mac 安装Homebrew](./apple/homebrew.md)
 
 ## AI
 
