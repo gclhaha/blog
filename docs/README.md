@@ -42,9 +42,11 @@
 
 ## AI
 
-[AI使用指南](./ai/ai-guide.md)
+[0费用搭建GPT聊天网站](./ai/0-cost-gpt-chat.md)
 
 [购买ChatGPT plus的历程](./ai/chatGPT-plus-guide.md)
+
+[AI使用指南](./ai/ai-guide.md)
 
 [通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)
 

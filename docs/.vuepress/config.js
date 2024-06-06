@@ -4,7 +4,7 @@ inject();
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: 'gclhahah的博客',
+  title: 'gclhaha的博客',
   head: [
     [
       "script",
