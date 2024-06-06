@@ -34,7 +34,7 @@ fork项目到自己的github账号
 具体介绍可以看博客[Vercel：前端部署托管平台](../building/vercel.md)
 
 1. 创建一个项目，选择刚才fork下来的ChatGPT-Next-Web项目
-2. 创建时配置环境变量`GOOGLE_API_KEY`，value 为第一步获取的的Gemini api key，配置`CODE`，value为想要的密码
+2. 创建时配置环境变量`GOOGLE_API_KEY`，value 为第一步获取的的Gemini api key，配置`CODE`，value为想要的密码。可选：配置`CUSTOM_MODELS`，value为 **-all,+gemini-1.0-pro,+gemini-1.5-pro,+gemini-1.5-flash-latest** 控制用户可以选择使用哪些模型
 3. 点击`Deploy`部署项目
 
 ## 4.映射个人或公司域名
