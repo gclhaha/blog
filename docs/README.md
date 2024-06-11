@@ -58,6 +58,8 @@
 
 ## CheatSheet
 
+[CentOS 7.9 安装 Redis 7.2.5](./cheat-sheet/redis-install.md)
+
 [搭建Kafka测试环境](./cheat-sheet/kafka-startup.md)
 
 ## 随笔
