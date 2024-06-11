@@ -130,7 +130,7 @@ sudo chown -R redis:redis /var/lib/redis
 
 ```bash
 redis-cli
-AUTH xxx xxx是你的密码
+AUTH xxx xxx是你在redis.conf中requirepass密码
 ```
 
 req
