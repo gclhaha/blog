@@ -107,9 +107,9 @@
     2. daemonize 。默认no 改为 yes 。 开启后台运行
     3. bind 。 默认 127 ，只有本级能访问。注释掉，或者 改为 bind 0.0.0.0 。允许所有ip访问。
 
-   保存退出
+   保存退出。
 
-## 启动Redis
+## 4.启动Redis
 
 给Redis权限
 
@@ -124,7 +124,7 @@ sudo chown -R redis:redis /var/lib/redis
 
 不在下载地方的redis-server中运行，因为踩了个坑`Permission denied (publickey,gssapi-keyex,gssapi-with-mic).`。可以先在下载好的地方尝试运行，如果正常启动就不用切换目录.
 
-## 测试Redis
+## 5.测试Redis
 
 服务器内打开终端
 
