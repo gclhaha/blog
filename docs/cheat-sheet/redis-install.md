@@ -96,7 +96,7 @@
 2. 编辑内容
 
      ```bash
-        sudo vim /etc/redis/redis.conf
+    sudo vim /etc/redis/redis.conf
     ```
 
     其中要改的几个关键的，可以通过 `/` 后面跟关键词搜索，回车后会匹配第一个内容。
@@ -105,7 +105,7 @@
 
     1. requirepass 。设置密码，requirepass xxx 。xxx就是你的密码
     2. daemonize 。默认no 改为 yes 。 开启后台运行
-    3. bind 。 改为 默认 127 ，只有本级能访问。注释掉，或者 改为 bind 0.0.0.0 。允许所有ip访问。
+    3. bind 。 默认 127 ，只有本级能访问。注释掉，或者 改为 bind 0.0.0.0 。允许所有ip访问。
 
    保存退出
 
