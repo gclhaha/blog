@@ -6,7 +6,7 @@
 
 [Bug地狱 02:补救 构建监控平台查看系统运行与SQL执行情况](./bughell/02.md)
 
-## 关于构建 构建被动收入
+## 构建
 
 本目录下的内容会介绍如何无成本的构建自己的应用，提高开发效率。
 
@@ -29,6 +29,8 @@
 [Github Action：自动化构建你的应用](./building/githubaction.md)
 
 [Github Action + Docker Hub: 容器化自动构建你的应用](./building/dockerhub.md)
+
+[宝塔：安全高效的服务器运维面板](./building/bt.md)
 
 ## Golang
 
