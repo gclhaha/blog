@@ -42,6 +42,8 @@
 
 [Mac 安装Homebrew](./apple/homebrew.md)
 
+[构建iOS以及Apple watch应用及发布测试](./apple/archive.md)
+
 ## AI
 
 [0费用搭建GPT聊天网站](./ai/0-cost-gpt-chat.md)
@@ -57,6 +59,8 @@
 [MongoDB 字段中数据类型不一致序列化异常排查与处理](./bug/mongdb-var-data-type-different.md)
 
 [Mybatis PageHelper 异常 attempted to return null from a method with a primitive return type (long) 问题分析](./bug/mybatis-pagehelper.md)
+
+[构建iOS以及Apple watch应用及发布测试](./apple/archive.md)
 
 ## CheatSheet
 
