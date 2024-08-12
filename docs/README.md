@@ -65,7 +65,7 @@ talk in public, build in public
 
 ~~[购买ChatGPT plus的历程](./ai/chatGPT-plus-guide.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，页面上gpt可以使用google登录
 
-~~[通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)~~ 被openai ban了一次，现在api服务使用gemini，页面上gpt可以使用google登录
+~~[通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，页面上gpt可以使用google登录
 
 [AI使用指南](./ai/ai-guide.md)
 
