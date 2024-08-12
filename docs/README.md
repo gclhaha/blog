@@ -2,7 +2,7 @@
 
 ## 关于我
 
-对很多技术都很感兴趣，希望成为全能的工程师的Java开发。学习过的语言：Java、Go、Vue、React、Nextjs、Flutter、Swift
+对很多技术都很感兴趣，希望成为全能工程师的。学习过的语言熟练度：Java、Go、Vue、React、Nextjs、Swift、Flutter
 
 [我的GitHub地址](https://github.com/gclhaha)
 
