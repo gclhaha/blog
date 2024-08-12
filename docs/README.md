@@ -2,9 +2,16 @@
 
 ## 关于我
 
-对很多技术都很感兴趣，希望成为全能工程师的。学习过的语言熟练度：Java、Go、Vue、React、Nextjs、Swift、Flutter
+我是gclhaha，是的，gcl是我名字的缩写，对很多技术都很感兴趣，想要成为优秀的工程师。学习过的语言：Java、Go、Vue、React、Nextjs、Swift、Flutter
 
-[我的GitHub地址](https://github.com/gclhaha)
+该博客托管在 [GitHub](https://github.com/gclhaha/blog) 中，使用 Vercel 部署。
+
+talk in public, build in public
+
+### 联系方式
+
+- 邮箱：  gclhaha#qq.com (把#换成@)
+- GitHub [@gclhaha](https://github.com/gclhaha)
 
 ## [短想法](./thoughts.md)
 
