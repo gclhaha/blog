@@ -1,5 +1,13 @@
 # gclhaha的博客
 
+## 关于我
+
+对很多技术都很感兴趣，希望成为全能的工程师的Java开发。学习过的语言：Java、Go、Vue、React、Nextjs、Flutter、Swift
+
+[我的GitHub地址](https://github.com/gclhaha)
+
+## [短想法](./thoughts.md)
+
 ## Bug地狱
 
 [Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
