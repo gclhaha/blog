@@ -51,7 +51,9 @@
 
 [宝塔：安全高效的服务器运维面板](./building/bt.md)
 
-- [制作Logo](https://www.logo.surf/)
+[制作Logo](https://www.logo.surf/)
+
+[通过Cloudflare Worker 功能科学访问OpenAI或其他API地址](./building/cloudflare-worker.md)
 
 ## Golang
 
