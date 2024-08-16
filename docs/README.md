@@ -13,7 +13,7 @@ talk in public, build in public
 - 邮箱：  gclhaha#qq.com (把#换成@)
 - GitHub [@gclhaha](https://github.com/gclhaha)
 
-## [高质量内容](./sources.md)
+## [互联网上的高质量内容](./sources.md)
 
 ## [短想法](./thoughts.md)
 
