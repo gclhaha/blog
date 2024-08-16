@@ -2,11 +2,13 @@
 
 ## 关于我
 
-我是gclhaha，是的，gcl是我名字的缩写，对很多技术都很感兴趣，想要成为优秀的工程师。学习过的语言：Java、Go、Vue、React、Nextjs、Swift、Flutter
+我是gclhaha，是的，gcl是我名字的缩写。学习过的语言：Java、Go、Vue、React、Nextjs、Swift、Flutter
 
 该博客托管在 [GitHub](https://github.com/gclhaha/blog) 中，使用 Vercel 部署。
 
-talk in public, build in public
+> _保持对未来的恐惧，无限进步_
+>
+> _talk in public, build in public_
 
 ### 联系方式
 
