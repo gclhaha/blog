@@ -19,6 +19,10 @@
 
 ## [短想法](./thoughts.md)
 
+## Java
+
+[源码分析：ArrayList](./java/arraylist.md)
+
 ## Bug地狱
 
 [Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
