@@ -203,7 +203,7 @@ private static int hugeLength(int oldLength, int minGrowth) {
 `ArraysSupport.newLength()`的流程，首先计算首选长度，如果首选长度在合理范围内（大于0 并小于等于 SOFT_MAX_ARRAY_LENGTH Integer.MAX_VALUE - 8），就返回推荐长度。否则就调用`hugeLength()`方法处理。`hugeLength()`方法计算最小所需长度（原始长度+最小扩容长度），如果计算结果出现溢出（负数），就抛出`OutOfMemoryError`异常。如果最小长度在合理范围内（SOFT_MAX_ARRAY_LENGTH 为 Integer.MAX_VALUE - 8），就返回最大安全长度。如果最小长度超过最大安全长度，就返回最小长度。
 
 其中添加`SOFT_MAX_ARRAY_LENGTH`的判断的原因在其注释上做了说明。数组增长计算所施加的软最大数组长度。某些JVM(例如HotSpot)具有实现限制，这将导致
-OutOfMemoryError("请求的数组大小超过VM限制") 。MAXVALUE 即使有足够的可用堆。实际的限制可能取决于某些JVM实现特有的特性，例如对象头大小。软极大值的选择是保守的，以便小于可能遇到的任何实现限制。
+OutOfMemoryError("请求的数组大小超过VM限制")。实际的限制可能取决于某些JVM实现特有的特性，例如对象头大小。软极大值的选择是保守的，以便小于可能遇到的任何实现限制。
 
 ## 使用注意事项
 
