@@ -128,7 +128,8 @@ public boolean remove(Object o) {
 }
 
 private void fastRemove(Object[] es, int i) {
-    modCount++; // 上面两个删除都调用这个方法，会增加 modCount，如果迭代器的 expectedModCount 不等于 modCount，抛出异常ConcurrentModificationException
+    // 上面两个删除都调用这个方法，会增加 modCount，如果迭代器的 expectedModCount 不等于 modCount，抛出异常ConcurrentModificationException
+    modCount++; 
     final int newSize;
     if ((newSize = size - 1) > i)
         System.arraycopy(es, i + 1, es, i, newSize - i);
@@ -146,7 +147,8 @@ private Object[] grow() {
 }
 
 private Object[] grow(int minCapacity) {
-    int oldCapacity = elementData.length;  // 获取当前数组的容量
+    // 获取当前数组的容量
+    int oldCapacity = elementData.length;  
 
     // 检查数组是否已经有内容或是否是一个空的默认数组
     if (oldCapacity > 0 || elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
@@ -163,7 +165,8 @@ private Object[] grow(int minCapacity) {
 }
 
 public static int newLength(int oldLength, int minGrowth, int prefGrowth) {
-    int prefLength = oldLength + Math.max(minGrowth, prefGrowth); // 计算首选长度，可能会溢出
+    // 计算首选长度，可能会溢出
+    int prefLength = oldLength + Math.max(minGrowth, prefGrowth);
 
     // 检查首选长度是否在合理范围内
     if (0 < prefLength && prefLength <= SOFT_MAX_ARRAY_LENGTH) {
@@ -175,12 +178,15 @@ public static int newLength(int oldLength, int minGrowth, int prefGrowth) {
 }
 
 private static int hugeLength(int oldLength, int minGrowth) {
-    int minLength = oldLength + minGrowth;  // 计算最小所需长度
+    // 计算最小所需长度
+    int minLength = oldLength + minGrowth;  
 
-    if (minLength < 0) { // 如果计算结果出现溢出（负数）
+    // 如果计算结果出现溢出（负数）
+    if (minLength < 0) { 
         throw new OutOfMemoryError(
             "Required array length " + oldLength + " + " + minGrowth + " is too large");
-    } else if (minLength <= SOFT_MAX_ARRAY_LENGTH) { // SOFT_MAX_ARRAY_LENGTH 为 Integer.MAX_VALUE - 8
+        // SOFT_MAX_ARRAY_LENGTH 为 Integer.MAX_VALUE - 8
+    } else if (minLength <= SOFT_MAX_ARRAY_LENGTH) { 
         // 如果最小长度在合理范围内，则返回最大安全长度
         return SOFT_MAX_ARRAY_LENGTH;
     } else {
