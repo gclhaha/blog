@@ -180,7 +180,7 @@ private static int hugeLength(int oldLength, int minGrowth) {
     if (minLength < 0) { // 如果计算结果出现溢出（负数）
         throw new OutOfMemoryError(
             "Required array length " + oldLength + " + " + minGrowth + " is too large");
-    } else if (minLength <= SOFT_MAX_ARRAY_LENGTH) {
+    } else if (minLength <= SOFT_MAX_ARRAY_LENGTH) { // SOFT_MAX_ARRAY_LENGTH 为 Integer.MAX_VALUE - 8
         // 如果最小长度在合理范围内，则返回最大安全长度
         return SOFT_MAX_ARRAY_LENGTH;
     } else {
@@ -190,7 +190,14 @@ private static int hugeLength(int oldLength, int minGrowth) {
 }
 ```
 
-当添加元素到 ArrayList 时，如果元素数量和容量相等，就会调用 grow 方法，扩容容量。
+当添加元素到 ArrayList 时，如果`add()`时元素数量和当前容量相等，或者在`addAll()`时，需要的新添加的元素长度大于可用长度，就会调用 grow 方法，扩容容量。步骤是：先对当前数据的长度进行判断，如果是默认空数组，就会扩容到默认容量或者最小所需容量。如果不是默认空数组，就会使用 `ArraysSupport.newLength()` 计算新的容量，然后将数组扩展到新的容量。
+
+先分析一下`ArraysSupport.newLength()`的三个方法参数，`oldLength`是当前数组的长度。`minGrowth`是最小增长量，为`minCapacity - oldCapacity`,也就是要扩容的长度，其中`minCapacity`是`add`方法的size+1或者`addAll`时计算的所需最小容量，size+新添加元素的长度。`prefGrowth`是首选增长量，右移了一位，等于除2，比如原始长度10，推荐扩容量就是5，最终就是15，扩容了1.5倍。
+
+`ArraysSupport.newLength()`的流程，首先计算首选长度，如果首选长度在合理范围内（大于0 并小于等于 SOFT_MAX_ARRAY_LENGTH Integer.MAX_VALUE - 8），就返回推荐长度。否则就调用`hugeLength()`方法处理。`hugeLength()`方法计算最小所需长度（原始长度+最小扩容长度），如果计算结果出现溢出（负数），就抛出`OutOfMemoryError`异常。如果最小长度在合理范围内（SOFT_MAX_ARRAY_LENGTH 为 Integer.MAX_VALUE - 8），就返回最大安全长度。如果最小长度超过最大安全长度，就返回最小长度。
+
+其中添加`SOFT_MAX_ARRAY_LENGTH`的判断的原因在其注释上做了说明。数组增长计算所施加的软最大数组长度。某些JVM(例如HotSpot)具有实现限制，这将导致
+OutOfMemoryError("请求的数组大小超过VM限制") 。MAXVALUE 即使有足够的可用堆。实际的限制可能取决于某些JVM实现特有的特性，例如对象头大小。软极大值的选择是保守的，以便小于可能遇到的任何实现限制。
 
 ## 使用注意事项
 
@@ -236,7 +243,7 @@ list.stream().filter(s -> !s.equals("a")).collect(Collectors.toList());
 - ArrayList 是非线程安全的，如果需要线程安全的 List，可以使用 Collections.synchronizedList 方法包装 ArrayList，或者使用 CopyOnWriteArrayList。
 
 ```java
-// 线程安全的 List。 给除了返回ListIterator的方法，其他方法都加了synchronized关键字
+// 线程安全的 List。 除了返回ListIterator的方法，其他方法都加了synchronized关键字，读写都会加锁。
 List<String> list = Collections.synchronizedList(new ArrayList<>());
 
 // 线程安全的 List。 写操作时，会复制一个新的数组，读操作不会加锁。
