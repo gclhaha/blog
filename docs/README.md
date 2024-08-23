@@ -21,7 +21,27 @@
 
 ## Java
 
+经过面试经历，底层原理了解的太浅，业务做久了，深度探索懈怠了，开始深入源码！！！
+
 [源码分析：ArrayList](./java/arraylist.md)
+
+[源码分析：HashMap](/) todo
+
+[源码分析：ConcurrentHashMap](/) todo
+
+[Java JDK 包结构与内容简介](/) todo
+
+[源码分析：ConcurrentHashMap](/) todo
+
+[源码分析：ThreadPoolExecutor](/) todo
+
+[Java类加载过程](/) todo
+
+[Spring启动流程](/) todo
+
+[Spring Bean生命周期](/) todo
+
+[Spring AOP原理](/) todo
 
 ## Bug地狱
 
