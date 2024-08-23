@@ -63,7 +63,7 @@ sku呢，可以保持和Bundle Identier Id一致
 
 此功能用来构建用于发布的版本
 
-在`Product`->`Archive`
+在 xcode 中，选择`Product`->`Archive`
 
 在配置开发者账号，Profile文件，id后，才能构建成功此时可以看到构建好的app，点击`Distribute App`,在Apple Store Connect中就可以看到软件，可以进行后续的分发
 
