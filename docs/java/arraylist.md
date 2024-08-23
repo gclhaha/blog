@@ -217,7 +217,7 @@ for (int i = 0; i < list.size(); i++) {
     }
 }
 
-// 应避免的删除方式
+// 应避免的删除方式 继承了Iterable接口的类，增强for循环会优化成迭代器，但是不推荐这样使用，不优雅
 for (String s : list) {
     if (s.equals("a")) {
         list.remove(s);
