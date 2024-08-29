@@ -4,6 +4,7 @@
 
 - [扭转人工智能局面](https://ia.net/topics/turning-the-tables-on-ai) 通过AI让自己更好的思考
 - [显而易见的旅行建议](https://dynomight.net/travel/)
+- [如果你是CPU](https://cpu.land/)
 
 ## 信息流
 
