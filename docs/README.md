@@ -25,7 +25,7 @@
 
 [源码分析：ArrayList](./java/arraylist.md)
 
-[源码分析：HashMap](/) todo
+[源码分析：HashMap](./java/hashmap.md)
 
 [源码分析：ConcurrentHashMap](/) todo
 
@@ -46,6 +46,8 @@
 [Spring Transaction原理](/) todo
 
 [源码分析：Java Lock](./java/lock.md)
+
+[Syncronized原理](/) todo
 
 ## Bug地狱
 
