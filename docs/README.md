@@ -29,9 +29,7 @@
 
 [源码分析：ConcurrentHashMap](./java/concurrenthashmap.md)
 
-[Java JDK 包结构与内容简介](/) todo
-
-[源码分析：ConcurrentHashMap](/) todo
+[Java JDK 包结构与内容简介](./java/packages.md)
 
 [源码分析：ThreadPoolExecutor](/) todo
 
