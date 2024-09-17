@@ -23,6 +23,14 @@
 
 经过面试经历，底层原理了解的太浅，业务做久了，深度探索懈怠了，开始深入源码！！！
 
+[源码分析：ThreadPoolExecutor](./java/threadpoolexecutor.md)
+
+[源码分析：Java Lock](./java/lock.md)
+
+[Syncronized原理](/) todo
+
+[Java JUC 队列集合](/) todo
+
 [源码分析：ArrayList](./java/arraylist.md)
 
 [源码分析：HashMap](./java/hashmap.md)
@@ -30,8 +38,6 @@
 [源码分析：ConcurrentHashMap](./java/concurrenthashmap.md)
 
 [Java JDK 包结构与内容简介](./java/packages.md)
-
-[源码分析：ThreadPoolExecutor](/) todo
 
 [Java类加载过程](/) todo
 
@@ -43,10 +49,6 @@
 
 [Spring Transaction原理](/) todo
 
-[源码分析：Java Lock](./java/lock.md)
-
-[Syncronized原理](/) todo
-
 ## Bug地狱
 
 [Bug地狱 01:突然宕机，企业级应用到底怎么了](./bughell/01.md)
@@ -56,8 +58,6 @@
 ## 构建
 
 本目录下的内容会介绍如何无成本的构建自己的应用，提高开发效率。
-
-其中会涉及许多开发可以使用的平台，或者获得被动收入的方式。
 
 [为什么要在业余时间构建被动收入](./building/README.md)
 
@@ -83,9 +83,13 @@
 
 [通过Cloudflare Worker 功能科学访问OpenAI或其他API地址](./building/cloudflare-worker.md)
 
+[Ansible: 自动化运维平台](/) todo
+
 ## Golang
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
+
+[使用Go + GPT实现批处理国际化与翻译](/) todo
 
 ## Apple
 
