@@ -134,3 +134,165 @@ class PausableThreadPoolExecutor extends ThreadPoolExecutor {
 **自版本:** 1.5
 
 **作者:** Doug Lea
+
+## execute 方法
+
+`execute` 方法是提交任务的主要方法，它接收一个 `Runnable` 任务，然后将其提交到线程池中。
+
+方法注释如下：
+
+分3个步骤进行:
+
+1. 如果正在运行的线程数少于核心池大小，请尝试以给定命令作为第一个任务启动一个新线程。调用 addWorker 会原子地检查 runState和 workerCount，因此可以通过返回false 来防止在不应添加线程时添加线程的错误警报。
+
+2. 如果任务可以成功排队，那么我们仍然需要再次检查是否应该添加一个线程(因为上次检查后现有线程已经死亡)或者池自从进入该方法以来已经关闭。因此，我们再次检查状态，如果有必要，在停止时回滚入队，如果没有新线程，则启动一个新线程。
+
+3. 如果我们无法排队任务，那么我们尝试添加一个新线程，如果它失败，我们知道我们已关闭或已饱和，因此拒绝该任务。
+
+```java
+public void execute(Runnable command) {
+    int c = ctl.get();
+    if (workerCountOf(c) < corePoolSize) {
+        if (addWorker(command, true))
+            return;
+        c = ctl.get();
+    }
+    if (isRunning(c) && workQueue.offer(command)) {
+        int recheck = ctl.get();
+        if (! isRunning(recheck) && remove(command))
+            reject(command);
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    }
+    else if (!addWorker(command, false))
+        reject(command);
+}
+```
+
+## addWorker 方法
+
+`addWorker` 方法是用来添加新的工作线程的，它接收一个 `Runnable` 任务和一个 `boolean` 参数，用来表示是否是核心线程。
+
+方法注释：
+
+检查是否可以添加一个新的工作线程，考虑当前的线程池状态和给定的边界（核心线程数或最大线程数）。如果可以，则相应地调整工作线程计数，并且如果可能，创建一个新的工作线程并启动它，运行 firstTask 作为它的第一个任务。此方法如果线程池已停止或有资格关闭，则返回 false。如果线程工厂在被要求时无法创建线程，它也会返回 false。如果线程创建失败，无论是由于线程工厂返回 null，还是由于异常（通常是 Thread.startO 中的 OutOfMemoryError），我们都会干净地回滚。
+
+@param firstTask 新线程应该首先运行的任务（或 null 如果没有）。工作线程是用一个初始的第一个任务创建的（在 execute 方法中），以绕过在有少于 corePoolSize 线程时（在这种情况下我们总是启动一个），或者队列已满时（在这种情况下我们必须绕过队列）的排队。最初空闲的线程通常通过 prestartCoreThread 方法创建，或者用来替换其他正在死亡的工作线程。
+
+@param core 如果为 true，则使用 corePoolSize 作为边界，否则使用 maximumPoolSize。（这里使用布尔指示器而不是值，以确保在检查其他池状态后读取最新值）。
+
+@return 如果成功则返回 true。
+
+```java
+private boolean addWorker(Runnable firstTask, boolean core) {
+    // retry标签，用于外层循环控制重试
+    retry:
+    for (int c = ctl.get();;) {
+        // 检查队列是否为空，只有在必要时才进行
+        if (runStateAtLeast(c, SHUTDOWN)
+            && (runStateAtLeast(c, STOP)
+                || firstTask != null
+                || workQueue.isEmpty()))
+            return false;
+
+        // 内层循环，用于判断是否可以增加worker线程
+        for (;;) {
+            // 如果当前线程数达到核心线程或最大线程限制，则返回false
+            if (workerCountOf(c)
+                >= ((core ? corePoolSize : maximumPoolSize) & COUNT_MASK))
+                return false;
+            // CAS操作，尝试增加worker线程数，成功则跳出retry标签
+            if (compareAndIncrementWorkerCount(c))
+                break retry;
+            c = ctl.get();  // 重新读取ctl值
+            // 如果状态已经至少是SHUTDOWN，则继续重试
+            if (runStateAtLeast(c, SHUTDOWN))
+                continue retry;
+            // 否则CAS失败，重试内层循环
+        }
+    }
+
+    // 标识是否成功启动worker线程
+    boolean workerStarted = false;
+    // 标识是否成功添加worker线程
+    boolean workerAdded = false;
+    Worker w = null;
+    try {
+        // 创建新的Worker实例
+        w = new Worker(firstTask);
+        final Thread t = w.thread;
+        if (t != null) {
+            final ReentrantLock mainLock = this.mainLock;
+            // 加锁，确保线程安全
+            mainLock.lock();
+            try {
+                // 再次检查状态，确保不会在获取锁之前关闭
+                int c = ctl.get();
+
+                // 如果线程池处于运行状态或处于STOP之前且没有初始任务
+                if (isRunning(c) ||
+                    (runStateLessThan(c, STOP) && firstTask == null)) {
+                    // 检查线程状态是否为NEW，如果不是，抛出异常
+                    if (t.getState() != Thread.State.NEW)
+                        throw new IllegalThreadStateException();
+                    // 将Worker添加到workers集合中
+                    workers.add(w);
+                    workerAdded = true;
+                    // 更新线程池中最大线程数记录
+                    int s = workers.size();
+                    if (s > largestPoolSize)
+                        largestPoolSize = s;
+                }
+            } finally {
+                // 解锁，保证其他线程能够继续操作
+                mainLock.unlock();
+            }
+            // 如果worker添加成功，则启动线程
+            if (workerAdded) {
+                container.start(t);
+                workerStarted = true;
+            }
+        }
+    } finally {
+        // 如果worker没有启动成功，调用addWorkerFailed进行处理
+        if (! workerStarted)
+            addWorkerFailed(w);
+    }
+    // 返回是否成功启动worker
+    return workerStarted;
+}
+```
+
+创建 `worker` 的整体流程可以总结为以下步骤：
+
+1. **判断是否可以添加新线程**：
+   * 首先通过外层循环，读取 `ctl` 的值，判断线程池的状态是否允许创建新线程。
+   * 如果线程池处于 `SHUTDOWN` 状态且满足某些条件（如 `STOP` 状态、初始任务不为空、队列为空），则不允许添加线程，直接返回 `false`。
+
+2. **检查线程数量限制**：
+   * 通过内层循环判断当前线程数量是否已达到核心线程数（`corePoolSize`）或最大线程数（`maximumPoolSize`）。如果达到限制，则不允许创建新线程，返回 `false`。
+   * 使用 CAS 操作（`compareAndIncrementWorkerCount`）尝试增加线程数量。如果增加成功，跳出重试循环，否则重新获取 `ctl` 的值进行重试。
+
+3. **创建并添加 `Worker` 实例**：
+   * 在创建 `Worker` 实例后，获取该 `Worker` 对应的线程。
+   * 通过锁定主锁（`mainLock`）来确保线程安全，在锁定状态下再次检查线程池的运行状态，防止在获取锁之前发生状态变化。
+   * 如果线程池仍然处于运行状态或者处于 `STOP` 之前的状态（且初始任务为空），则将新的 `Worker` 实例添加到 `workers` 集合中。
+   * 更新线程池的最大线程数记录。
+
+4. **启动线程**：
+   * 如果 `Worker` 被成功添加到 `workers` 集合中，调用 `container.start(t)` 启动对应的线程。
+
+5. **异常处理**：
+   * 如果线程未能成功启动，则调用 `addWorkerFailed(w)` 进行失败处理，保证系统的健壮性。
+
+6. **返回结果**：
+   * 最终，返回是否成功启动了 `Worker`，即返回 `workerStarted` 的值。
+
+### 简化流程
+
+1. 判断线程池状态是否允许添加新线程。
+2. 检查当前线程数量是否已达到核心或最大线程数。
+3. 使用 CAS 增加线程计数，确保线程安全。
+4. 创建 `Worker` 实例，并在加锁的状态下将其添加到线程池。
+5. 启动新线程，若失败则进行处理。
+6. 返回线程启动结果。
