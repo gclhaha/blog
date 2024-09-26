@@ -89,7 +89,7 @@
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
 
-[使用Go + GPT实现批处理国际化与翻译](/) todo
+[使用Go + GPT实现批处理国际化与翻译](./golang/go-with-gpt-batch-i18n-and-translation.md)
 
 ## Apple
 
