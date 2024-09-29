@@ -22,9 +22,9 @@
 
 并且通过定义设置和获取Locale的方法，使用`LocaleContextHolder.setLocale(locale)`和`LocaleContextHolder.getLocale()`动态设置和获取语言。
 
-### 数据库内容提示国际化（废弃）
+### 数据库脚本国际化（废弃）
 
-此方案废弃，因为获取内容要进过一层转化服务，AOP的方式同时增大了系统的性能开销。所以数据库通过在脚本仓库中添加国际化文件，在Ansible脚本中添加国际化参数的方式，控制数据的初始化加载。
+此方案废弃，因为获取内容要进过一层转化服务，方案是将数据库内容存储国际化Key，转换代码项目中存储i18n文件夹，通过MessageSource实现。这种通过AOP的方式增大了系统的性能开销。所以数据库通过在脚本仓库中添加国际化文件，在Ansible脚本中添加国际化参数的方式，控制数据的初始化加载。
 
 1. mongodb 查询返回结果国际化后的查询结果。实现jdbc template和mybatis的查询结果国陋化。
 2. pgsql 查询结果国际化。实现jdbc template结果国际化。
@@ -166,7 +166,7 @@ public class MongoI18nResultHandler {
 }
 ```
 
-## 数据库内容提示国际化
+## 数据库脚本国际化（最终方案）
 
 切面的方案废弃，使用脚本加载不同的国际化内容文件，实现数据的初始化。不影响程序运行时的性能。
 
@@ -181,7 +181,7 @@ public class MongoI18nResultHandler {
 
 1. 复制把中文替换为国际化key的文件，并生成新的项目文件，保持原始项目目录结构。这个对于使用IDEA插件单个替换词条的方式，效率提升很大。
 2. 将go程序打包成可执行文件，直接在windows或者mac环境直接执行，只需要添加项目目录参数即可。
-3. 另外写一个程序，在excel中追加通过pgt翻译的内容，存入excel，供翻译人员查看。这样就把任务变为，翻译部门寻找开发获取中文语意，从头翻译。改为，根据excel行中的完整内容，gpt翻译参考，审核翻译结果，必要情况再改正手动翻译。大大提高了翻译部门的工作效率。并且提供了中文词条当前行的完整内容，方便翻译人员理解上下文，节省了翻译部和开发人员的沟通成本。
+3. 另外写一个程序，在excel中添加一列，追加通过GPT翻译的内容，存入excel，供翻译人员查看。这样就把任务从，1.翻译部门寻找开发获取中文语意 -> 2.从头翻译。改为，1.根据excel行中的完整内容以及gpt翻译参考 -> 2.审核翻译结果 -> 3.必要情况再改正手动翻译。大大提高了翻译部门的工作效率。并且提供了中文词条当前行的完整内容，方便翻译人员理解上下文，节省了翻译部和开发人员的沟通成本。
 
 其中go程序都是通过Gemini和ChatGPT来帮助我实现的，作为GPT时代的工程师，要更好的利用AI来提高工作效率。
 
@@ -205,6 +205,8 @@ public class MongoI18nResultHandler {
 
 首先改造go程序，原先是在文件夹路径下生成_en-US文件，改为在上层en-US文件夹下生成文件。这样所有包含中文的文件就通过excel创建了en-US文件夹，文件内容也进行了替换。其中的文件名不变，这样就避免了对脚本的重要逻辑进行改动。
 
+ps：为什么是上层文件夹，而不是顶层文件夹。因为项目中的升级脚本有很多作为版本号的文件夹，文件夹或文件的名称有可能会被作为某些业务（比如 ddd#tt ddd为数据库名， tt为表名）。在执行的shell脚本中，涉及这种判断。以及执行某些目录的匹配判断，为了尽可能小的改动，尽可能少的改动脚本和添加判断，避免副作用。在上层添加了一层en-US文件夹，是考量后的结果。
+
 现在包含中文的文件都在en-US文件夹中了，但是文件如果不在excel里，也就是说文件中没有中文，那么是不在en-US文件夹中的。其中一些常量的js文件或者当前版本使用的公共js文件，为了避免脚本去其他路径加载文件，以及对脚本的大改动。再写一个go脚本，遍历项目目录，如果当前文件夹中的文件不在en-US文件夹中，就复制到en-US文件夹中。这样就保证了所有的文件都在en-US文件夹中。
 
 现在再对脚本进行改动，只需要根据LANGUAGE参数，追加扫描的文件路径，实现动态加载不同语言的文件夹。脚本判断逻辑基本没有改动。经过测试，数据完整性和代码可读性、可维护性都有了很大的提升。
@@ -221,3 +223,71 @@ public class MongoI18nResultHandler {
 2. go的类型限制和java一样是强类型，不像python是弱类型，主要也是没那么熟悉python，至少生成的脚本要达到自己能理解的程度。另外包引用不需要maven这种仓库工具，直接通过import就可以使用。
 
 总体来讲，使用go开发成本很小，不用像java一样创建一个maven项目。也可以原生编译出可执行文件，方便在不同的环境中执行。文件大小也很小。总体下来，对我来说，如果是开发中提效的脚本，go是一个非常甜点的选择，爱不释手。在完整或者大型项目开发中，我也是会优先选择go来实现，引入一些Gin、Viper、Gorm等库，或者直接使用Gin-Vue-Admin项目模版（类似Java的Ruoyi），就可以快速的开发出一个完整的项目，最终包大小也很适合容器化和云原生部署。
+
+## PPS: 文件夹层级问题，导致没有国际化参数的脚本多加载了en-US文件夹
+
+在pgsql升级脚本的执行log中发现，在没有国际化参数的情况下，把en-US文件夹作为了数据库执行了加载脚本的逻辑。虽然没有产生数据异常，但脚本确实存在漏洞。通过提升en-US文件夹的层级，解决了这个问题。在下面脚本这部分内容
+
+```shell
+INIT_DIR="$INIT_DATA_DIR/${APP_NAME}/init-db"
+
+# 如果LANGUAGE有值，在INIT_DIR中追加LANGUAGE
+if [ -n "$LANGUAGE" ]; then
+    INIT_DIR="${INIT_DIR}/${LANGUAGE}"
+fi
+
+COMPONENT_NAMES=()
+while IFS= read -r -d $'\0' dir; do
+  COMPONENT_NAMES+=("$(basename "$dir")")
+done < <(find "$INIT_DIR" -mindepth 1 -maxdepth 1 -type d -print0)
+```
+
+就是这个find方法，en-US就在INIT_DIR中，导致了这个问题。通过提升en-US文件夹的层级，并把脚本改为
+
+```shell
+if [ -n "$LANGUAGE" ]; then
+    INIT_DIR="$INIT_DATA_DIR/${APP_NAME}/${LANGUAGE}/init-db"
+else
+    INIT_DIR="$INIT_DATA_DIR/${APP_NAME}/init-db"
+fi
+
+COMPONENT_NAMES=()
+while IFS= read -r -d $'\0' dir; do
+  COMPONENT_NAMES+=("$(basename "$dir")")
+done < <(find "$INIT_DIR" -mindepth 1 -maxdepth 1 -type d -print0)
+```
+
+升级脚本中同理，把原脚本
+
+```shell
+UPGRADE_DIR="$UPGRADE_DATA_DIR/${APP_NAME}/upgrade-db"
+
+# 如果LANGUAGE有值，在UPGRADE_DIR中追加LANGUAGE
+if [ -n "$LANGUAGE" ]; then
+    UPGRADE_DIR="${UPGRADE_DIR}/${LANGUAGE}"
+fi
+
+# 版本列表
+VERSIONS=$(grep -v '#' $UPGRADE_DATA_DIR/${APP_NAME}/support_versions.conf)
+```
+
+改为
+
+```shell
+UPGRADE_DATA_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+if [ -n "$LANGUAGE" ]; then
+    UPGRADE_DIR="$UPGRADE_DATA_DIR/${APP_NAME}/${LANGUAGE}/upgrade-db"
+else
+    UPGRADE_DIR="$UPGRADE_DATA_DIR/${APP_NAME}/upgrade-db"
+fi
+
+# 版本列表
+VERSIONS=$(grep -v '#' $UPGRADE_DATA_DIR/${APP_NAME}/support_versions.conf)
+```
+
+最终把en-US文件向上存放一层，解决层级问题。
+
+另一种方式，定义一个数组，存放所有的支持的语言，通过判断LANGUAGE是否在数组中，来决定是否加载对应的文件夹，同样可以解决问题。
+
+这里只是个人思考，最终用何种方式，要等手头的修复任务做完，根据负责人后续的要求进行更改。
