@@ -1,5 +1,9 @@
 # 短想法
 
+- Muss es sein？非如此不可？es muss sein！非如此不可！【不能承受的生命之轻（米兰·昆德拉）】
+
+- "Gather ye rosebuds while ye may. Then be not coy but use your time, and while ye may, go marry. For having lost but once your prime, you may forever tarry." 「花开堪折直须折。莫因娇羞惜爱怜，趁此春光嫁少年。等闲负了青春约，此生难再觅良缘。」【新闻编辑室 The Newsroom S1E09】 -2024.10.15
+
 - 即使岩石再坚硬，也是死的。鸡蛋再脆弱，也是活的生命。岩石最终会碎成细沙，而鸡蛋终究会孵化越过岩石。[【辩护人 변호인 (2013)】](https://movie.douban.com/subject/21937445/) -2024.10.06
 
 - 我们曾经觉得歌名里「未来」的尺度是一个特别遥远的点，但如今，那个「未来」好像都是要回头看的东西了，可谁说回头看的就不是未来呢，只要没有实现，就可以是未来。 [【3秒后你会开始跟唱!丨华语前奏排行榜（一）丨HOPICO】](https://www.bilibili.com/video/BV1dH1dYKExe) -2024.10.06
