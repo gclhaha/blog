@@ -29,7 +29,7 @@
 
 [Syncronized原理](/) todo
 
-[Java JUC 队列集合](/) todo
+[Java JUC 集合](./java/juc-collection.md)
 
 [源码分析：ArrayList](./java/arraylist.md)
 
