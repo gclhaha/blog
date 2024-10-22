@@ -1,6 +1,6 @@
-# CentOS 7.9 源码编译安装 PostgreSQL 17 详解
+# CentOS 7.9 源码安装 PostgreSQL 17
 
-因为国内的服务器无法访问Docker镜像，所以需要源码编译安装PostgreSQL。
+因为国内的服务器无法访问 Docker 镜像，所以需要源码编译安装 PostgreSQL。
 
 本文详细记录了在 CentOS 7.9 上使用中国镜像源码编译安装 PostgreSQL 17 的完整过程，并包含了过程中遇到的问题及解决方法，希望能帮助你顺利完成安装。
 

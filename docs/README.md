@@ -85,7 +85,9 @@
 
 [Ansible: 自动化运维平台](/) todo
 
-[CentOS 7.9 源码安装 PostgreSQL 17](./building/cenos79-install-pgsql17.md)
+[CentOS 7.9 源码安装 PostgreSQL 17](./building/centos79-install-pgsql17.md)
+
+[CentOS 7.9 源码安装 Redis](./building/centos79-install-redis.md)
 
 ## Golang
 
