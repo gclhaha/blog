@@ -85,6 +85,8 @@
 
 [Ansible: 自动化运维平台](/) todo
 
+[CentOS 7.9 源码安装 PostgreSQL 17](./building/cenos79-install-pgsql17.md)
+
 ## Golang
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
@@ -103,9 +105,9 @@
 
 [0费用搭建GPT聊天网站](./ai/0-cost-gpt-chat.md)
 
-~~[购买ChatGPT plus的历程](./ai/chatGPT-plus-guide.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，页面上gpt可以使用google登录
+~~[购买ChatGPT plus的历程](./ai/chatGPT-plus-guide.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，网页上使用ChatGPT可以直接使用google登录，不用手机号了
 
-~~[通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，页面上gpt可以使用google登录
+~~[通过ChatGPT IOS订阅plus](./ai/subscribe-by-ios.md)~~ 被openai ban了一次帐号，现在api服务使用gemini，网页上使用ChatGPT可以直接使用google登录，不用手机号了
 
 [AI使用指南](./ai/ai-guide.md)
 
