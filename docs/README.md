@@ -89,6 +89,8 @@
 
 [CentOS 7.9 源码安装 Redis](./building/centos79-install-redis.md)
 
+[CentOS 7.9 源码安装 Nginx](./building/centos79-install-nginx.md)
+
 ## Golang
 
 [Go与Java泛型原理简介](./golang/go-vs-java-generic.md)
