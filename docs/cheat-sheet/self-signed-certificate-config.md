@@ -124,7 +124,7 @@ openssl req -new -key ldap.key -out ldap.csr
 
 ## CA给服务器颁发证书
 
-此时可以制定一下证书的SAN配置，这样才可以支持IP和域名访问。
+此时可以制定一下证书的SAN配置，这样才可以支持IP和域名访问。否则会产生SSlShakeHand错误和PKIX验证错误。
 
 ```shell
 # 创建配置文件
