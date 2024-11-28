@@ -133,6 +133,8 @@
 
 ## 随笔
 
-[第二期：数据库初始化脚本与后端代码国际化方案](./eaasy/eaasy-2.md)
+[3: LDAPS 认证流程](./eassy/eassy-3.md)
 
-[第一期：关于面瘫的体验](./eaasy/eaasy-1.md)
+[2：数据库初始化脚本与后端代码国际化方案](./eaasy/eaasy-2.md)
+
+[1：关于面瘫的体验](./eaasy/eaasy-1.md)
