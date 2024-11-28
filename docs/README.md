@@ -133,7 +133,7 @@
 
 ## 随笔
 
-[3: LDAPS 认证流程](./eassy/eassy-3.md)
+[3: LDAPS 认证流程](./eaasy/eassy-3.md)
 
 [2：数据库初始化脚本与后端代码国际化方案](./eaasy/eaasy-2.md)
 
