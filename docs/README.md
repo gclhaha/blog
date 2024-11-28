@@ -123,7 +123,9 @@
 
 ## CheatSheet
 
-[OpenLDAP 安装以及自签名证书配置](./cheat-sheet/self-signed-certificate-config.md)
+[LDAP 常用命令](./cheat-sheet/ldap-command.md)
+
+[OpenLDAP 安装以及自签名证书配置](./cheat-sheet/ldap-self-signed-certificate-config.md)
 
 [CentOS 7.9 安装 Redis 7.2.5](./cheat-sheet/redis-install.md)
 
