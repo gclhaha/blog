@@ -6,7 +6,7 @@
 
 该博客托管在 [GitHub](https://github.com/gclhaha/blog) 中，使用 Vercel 部署。
 
-> _保持对未来的恐惧，无限进步_
+> _保持对未来的恐惧（热爱），无限进步_
 >
 > _talk in public, build in public_
 
