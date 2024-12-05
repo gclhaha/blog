@@ -27,7 +27,7 @@
 
 [源码分析：Java Lock](./java/lock.md)
 
-[Syncronized原理](/) todo
+[Syncronized原理](./java/syncronized.md)
 
 [Java JUC 集合](./java/juc-collection.md)
 
