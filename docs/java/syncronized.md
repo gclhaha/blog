@@ -456,3 +456,357 @@ JVM 中每个 Monitor 是由 C++ 实现的 ObjectMonitor 对象管理。
  • -l：显示局部变量表。
 
  • -s：显示方法的签名信息。
+
+## 和 Lock 的区别
+
+使用Lock来实现一遍，代码如下：
+
+```java
+import java.util.concurrent.locks.ReentrantLock;
+
+class BankAccount {
+
+    private final ReentrantLock lock = new ReentrantLock();
+
+    private int balance = 0; // 账户余额
+
+    // 存钱
+    public void deposit(int amount) {
+        lock.lock();
+        try {
+            balance += amount;
+            System.out.println(Thread.currentThread().getName() + " 存入: " + amount + "，当前余额: " + balance);
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
+    // 取钱
+    public void withdraw(int amount) {
+        lock.lock();
+        try {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println(Thread.currentThread().getName() + " 取出: " + amount + "，当前余额: " + balance);
+            } else {
+                System.out.println(Thread.currentThread().getName() + " 取钱失败，余额不足，当前余额: " + balance);
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+public class LockSyncExample {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        // 模拟多线程操作
+        Thread t1 = new Thread(() -> {
+            account.deposit(100);
+            account.withdraw(50);
+        }, "线程1");
+        t1.start();
+
+        Thread t2 = new Thread(() -> {
+            account.deposit(200);
+            account.withdraw(150);
+        }, "线程2");
+        t2.start();
+
+        Thread t3 = new Thread(() -> {
+            account.withdraw(50);
+        }, "线程3");
+        t3.start();
+
+    }
+}
+```
+
+使用 `javac LockSyncExample.java` 编译后，使用 `javap -c BankAccount.class` 查看编译后的字节码文件，可以看到 `ReentrantLock` 的使用：
+
+```java
+Classfile /Users/gclhaha/Documents/develop/javaworkspace/github/kafka_demo/src/main/java/top/gclhaha/kafka/locksync/BankAccount.class
+  Last modified 2024-12-7; size 1418 bytes
+  MD5 checksum 26f83c8ff22cf8e47110e9fc48cc6a3d
+  Compiled from "LockSyncExample.java"
+class top.gclhaha.kafka.locksync.BankAccount
+  minor version: 0
+  major version: 52
+  flags: ACC_SUPER
+Constant pool:
+   #1 = Methodref          #22.#38        // java/lang/Object."<init>":()V
+   #2 = Class              #39            // java/util/concurrent/locks/ReentrantLock
+   #3 = Methodref          #2.#38         // java/util/concurrent/locks/ReentrantLock."<init>":()V
+   #4 = Fieldref           #21.#40        // top/gclhaha/kafka/locksync/BankAccount.lock:Ljava/util/concurrent/locks/ReentrantLock;
+   #5 = Fieldref           #21.#41        // top/gclhaha/kafka/locksync/BankAccount.balance:I
+   #6 = Methodref          #2.#42         // java/util/concurrent/locks/ReentrantLock.lock:()V
+   #7 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
+   #8 = Class              #45            // java/lang/StringBuilder
+   #9 = Methodref          #8.#38         // java/lang/StringBuilder."<init>":()V
+  #10 = Methodref          #46.#47        // java/lang/Thread.currentThread:()Ljava/lang/Thread;
+  #11 = Methodref          #46.#48        // java/lang/Thread.getName:()Ljava/lang/String;
+  #12 = Methodref          #8.#49         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #13 = String             #50            //  存入:
+  #14 = Methodref          #8.#51         // java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+  #15 = String             #52            // ，当前余额:
+  #16 = Methodref          #8.#53         // java/lang/StringBuilder.toString:()Ljava/lang/String;
+  #17 = Methodref          #54.#55        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #18 = Methodref          #2.#56         // java/util/concurrent/locks/ReentrantLock.unlock:()V
+  #19 = String             #57            //  取出:
+  #20 = String             #58            //  取钱失败，余额不足，当前余额:
+  #21 = Class              #59            // top/gclhaha/kafka/locksync/BankAccount
+  #22 = Class              #60            // java/lang/Object
+  #23 = Utf8               lock
+  #24 = Utf8               Ljava/util/concurrent/locks/ReentrantLock;
+  #25 = Utf8               balance
+  #26 = Utf8               I
+  #27 = Utf8               <init>
+  #28 = Utf8               ()V
+  #29 = Utf8               Code
+  #30 = Utf8               LineNumberTable
+  #31 = Utf8               deposit
+  #32 = Utf8               (I)V
+  #33 = Utf8               StackMapTable
+  #34 = Class              #61            // java/lang/Throwable
+  #35 = Utf8               withdraw
+  #36 = Utf8               SourceFile
+  #37 = Utf8               LockSyncExample.java
+  #38 = NameAndType        #27:#28        // "<init>":()V
+  #39 = Utf8               java/util/concurrent/locks/ReentrantLock
+  #40 = NameAndType        #23:#24        // lock:Ljava/util/concurrent/locks/ReentrantLock;
+  #41 = NameAndType        #25:#26        // balance:I
+  #42 = NameAndType        #23:#28        // lock:()V
+  #43 = Class              #62            // java/lang/System
+  #44 = NameAndType        #63:#64        // out:Ljava/io/PrintStream;
+  #45 = Utf8               java/lang/StringBuilder
+  #46 = Class              #65            // java/lang/Thread
+  #47 = NameAndType        #66:#67        // currentThread:()Ljava/lang/Thread;
+  #48 = NameAndType        #68:#69        // getName:()Ljava/lang/String;
+  #49 = NameAndType        #70:#71        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #50 = Utf8                存入:
+  #51 = NameAndType        #70:#72        // append:(I)Ljava/lang/StringBuilder;
+  #52 = Utf8               ，当前余额:
+  #53 = NameAndType        #73:#69        // toString:()Ljava/lang/String;
+  #54 = Class              #74            // java/io/PrintStream
+  #55 = NameAndType        #75:#76        // println:(Ljava/lang/String;)V
+  #56 = NameAndType        #77:#28        // unlock:()V
+  #57 = Utf8                取出:
+  #58 = Utf8                取钱失败，余额不足，当前余额:
+  #59 = Utf8               top/gclhaha/kafka/locksync/BankAccount
+  #60 = Utf8               java/lang/Object
+  #61 = Utf8               java/lang/Throwable
+  #62 = Utf8               java/lang/System
+  #63 = Utf8               out
+  #64 = Utf8               Ljava/io/PrintStream;
+  #65 = Utf8               java/lang/Thread
+  #66 = Utf8               currentThread
+  #67 = Utf8               ()Ljava/lang/Thread;
+  #68 = Utf8               getName
+  #69 = Utf8               ()Ljava/lang/String;
+  #70 = Utf8               append
+  #71 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #72 = Utf8               (I)Ljava/lang/StringBuilder;
+  #73 = Utf8               toString
+  #74 = Utf8               java/io/PrintStream
+  #75 = Utf8               println
+  #76 = Utf8               (Ljava/lang/String;)V
+  #77 = Utf8               unlock
+{
+  top.gclhaha.kafka.locksync.BankAccount();
+    descriptor: ()V
+    flags:
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class java/util/concurrent/locks/ReentrantLock
+         8: dup
+         9: invokespecial #3                  // Method java/util/concurrent/locks/ReentrantLock."<init>":()V
+        12: putfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+        15: aload_0
+        16: iconst_0
+        17: putfield      #5                  // Field balance:I
+        20: return
+      LineNumberTable:
+        line 6: 0
+        line 8: 4
+        line 10: 15
+
+  public void deposit(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=2
+         0: aload_0
+         1: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+         4: invokevirtual #6                  // Method java/util/concurrent/locks/ReentrantLock.lock:()V
+         7: aload_0
+         8: dup
+         9: getfield      #5                  // Field balance:I
+        12: iload_1
+        13: iadd
+        14: putfield      #5                  // Field balance:I
+        17: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        20: new           #8                  // class java/lang/StringBuilder
+        23: dup
+        24: invokespecial #9                  // Method java/lang/StringBuilder."<init>":()V
+        27: invokestatic  #10                 // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+        30: invokevirtual #11                 // Method java/lang/Thread.getName:()Ljava/lang/String;
+        33: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        36: ldc           #13                 // String  存入:
+        38: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        41: iload_1
+        42: invokevirtual #14                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        45: ldc           #15                 // String ，当前余额:
+        47: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        50: aload_0
+        51: getfield      #5                  // Field balance:I
+        54: invokevirtual #14                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        57: invokevirtual #16                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        60: invokevirtual #17                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        63: aload_0
+        64: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+        67: invokevirtual #18                 // Method java/util/concurrent/locks/ReentrantLock.unlock:()V
+        70: goto          83
+        73: astore_2
+        74: aload_0
+        75: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+        78: invokevirtual #18                 // Method java/util/concurrent/locks/ReentrantLock.unlock:()V
+        81: aload_2
+        82: athrow
+        83: return
+      Exception table:
+         from    to  target type
+             7    63    73   any
+      LineNumberTable:
+        line 14: 0
+        line 16: 7
+        line 17: 17
+        line 19: 63
+        line 20: 70
+        line 19: 73
+        line 20: 81
+        line 22: 83
+      StackMapTable: number_of_entries = 2
+        frame_type = 247 /* same_locals_1_stack_item_frame_extended */
+          offset_delta = 73
+          stack = [ class java/lang/Throwable ]
+        frame_type = 9 /* same */
+
+  public void withdraw(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=2
+         0: aload_0
+         1: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+         4: invokevirtual #6                  // Method java/util/concurrent/locks/ReentrantLock.lock:()V
+         7: aload_0
+         8: getfield      #5                  // Field balance:I
+        11: iload_1
+        12: if_icmplt     74
+        15: aload_0
+        16: dup
+        17: getfield      #5                  // Field balance:I
+        20: iload_1
+        21: isub
+        22: putfield      #5                  // Field balance:I
+        25: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        28: new           #8                  // class java/lang/StringBuilder
+        31: dup
+        32: invokespecial #9                  // Method java/lang/StringBuilder."<init>":()V
+        35: invokestatic  #10                 // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+        38: invokevirtual #11                 // Method java/lang/Thread.getName:()Ljava/lang/String;
+        41: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        44: ldc           #19                 // String  取出:
+        46: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        49: iload_1
+        50: invokevirtual #14                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        53: ldc           #15                 // String ，当前余额:
+        55: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        58: aload_0
+        59: getfield      #5                  // Field balance:I
+        62: invokevirtual #14                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        65: invokevirtual #16                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        68: invokevirtual #17                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        71: goto          111
+        74: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        77: new           #8                  // class java/lang/StringBuilder
+        80: dup
+        81: invokespecial #9                  // Method java/lang/StringBuilder."<init>":()V
+        84: invokestatic  #10                 // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+        87: invokevirtual #11                 // Method java/lang/Thread.getName:()Ljava/lang/String;
+        90: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        93: ldc           #20                 // String  取钱失败，余额不足，当前余额:
+        95: invokevirtual #12                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        98: aload_0
+        99: getfield      #5                  // Field balance:I
+       102: invokevirtual #14                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       105: invokevirtual #16                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       108: invokevirtual #17                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       111: aload_0
+       112: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+       115: invokevirtual #18                 // Method java/util/concurrent/locks/ReentrantLock.unlock:()V
+       118: goto          131
+       121: astore_2
+       122: aload_0
+       123: getfield      #4                  // Field lock:Ljava/util/concurrent/locks/ReentrantLock;
+       126: invokevirtual #18                 // Method java/util/concurrent/locks/ReentrantLock.unlock:()V
+       129: aload_2
+       130: athrow
+       131: return
+      Exception table:
+         from    to  target type
+             7   111   121   any
+      LineNumberTable:
+        line 26: 0
+        line 28: 7
+        line 29: 15
+        line 30: 25
+        line 32: 74
+        line 35: 111
+        line 36: 118
+        line 35: 121
+        line 36: 129
+        line 37: 131
+      StackMapTable: number_of_entries = 4
+        frame_type = 251 /* same_frame_extended */
+          offset_delta = 74
+        frame_type = 36 /* same */
+        frame_type = 73 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Throwable ]
+        frame_type = 9 /* same */
+}
+SourceFile: "LockSyncExample.java"
+```
+
+其中可以看到 `ReentrantLock` 的使用。`invokevirtual` 指令调用 `ReentrantLock` 的 `lock` 和 `unlock` 方法。
+
+### 字节码区别
+
+`syncronized`：使用了 monitorenter 和 monitorexit 指令实现同步。JVM 本身管理锁的进入与退出，保证锁释放的安全性。
+
+`ReentrantLock`：调用了 lock.lock() 和 lock.unlock() 的方法。需要显式地调用 unlock()，否则可能因异常未释放锁，导致死锁风险。
+
+### 方法标记区别
+
+`synchronized`：方法会带有 ACC_SYNCHRONIZED 标志，JVM 在调用时会自动获取和释放锁。
+
+`ReentrantLock`：没有任何方法级别的字节码标志，锁操作是通过字节码调用 ReentrantLock 类的方法实现。
+
+### 异常处理
+
+`synchronized`：JVM 自动生成异常表，确保在任何异常情况下，monitorexit 都能被执行。
+
+`ReentrantLock`：异常处理由程序员控制。开需要使用 try-finally 保证 unlock() 一定被调用。
+
+### 总结
+
+Lock 提供更细粒度的锁控制和更高的性能（比如可中断锁、定时尝试锁等），但使用 synchronized 时 JVM 会进行一些优化，比如偏向锁、轻量级锁等。
+
+Lock 比 synchronized 更灵活，但需要手动释放锁，代码复杂性略高。
+
+使用 synchronized 时 JVM 自动管理锁的获取和释放，更容易避免编程错误。
