@@ -27,9 +27,6 @@ Building configuration...
 !
 version AC_RGOS 11.9(6)W4B1, Release(11180717)
 hostname run
-virtual-ap /opt/kad/down/smpplus-kad-3.5/kad.yml
-virtual-ap t2.s
-virtual-ap t2.sh
 wlan-config 1 zz zz
 wlan-config 2 Ruijie-web2
 wlan-config 3 tt tt
