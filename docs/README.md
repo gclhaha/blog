@@ -39,7 +39,7 @@
 
 [Java JDK 包结构与内容简介](./java/packages.md)
 
-[Java类加载过程](/) todo
+[Java类加载机制](./java/classload.md) todo
 
 [Spring启动流程](/) todo
 
@@ -122,6 +122,8 @@
 [构建iOS以及Apple watch应用及发布测试](./apple/archive.md)
 
 ## CheatSheet
+
+[锐捷AC 交换机信号切换](./cheat-sheet/ruijie-ac-signal.md)
 
 [LDAP 常用命令](./cheat-sheet/ldap-command.md)
 
