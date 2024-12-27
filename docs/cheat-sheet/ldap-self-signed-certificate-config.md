@@ -160,47 +160,6 @@ IP.1 = <服务器IP>
 openssl x509 -req -in ldap.csr -CA CA.pem -CAkey CA.key -CAcreateserial -out ldap.crt -days 1460 -sha256 -extfile openssl.cnf -extensions v3_req
 ```
 
-## 配置服务器证书IP 可选
-
-如果生成服务器crt的时候没有配置ip，此时如果用服务器的crt和key来访问会失败
-
-首先，创建或编辑一个 OpenSSL 配置文件，用于定义 SAN 信息。
-
-```shell
-[ req ]
-default_bits        = 2048
-default_md          = sha256
-distinguished_name  = req_distinguished_name
-x509_extensions     = v3_req
-prompt              = no
-
-[req_distinguished_name]
-C  = CN 可选
-ST = State 可选
-L  = City 可选
-O  = Organization 可选
-OU = Unit 可选
-CN = ldap.example.com 可选
-
-[req_ext]
-subjectAltName = @alt_names
-
-[ v3_req ]
-basicConstraints = CA:FALSE
-keyUsage = digitalSignature, keyEncipherment
-extendedKeyUsage = serverAuth
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1 = ldap.example.com 可选
-IP.1 = <服务器ip> 重要！！
-```
-
-```shell
-## 生成证书
-openssl req -new -x509 -key ldap.key -out ldap.crt -days 365 -config openssl.cnf
-```
-
 ### 验证证书中的 SAN 信息
 
 ```shell
