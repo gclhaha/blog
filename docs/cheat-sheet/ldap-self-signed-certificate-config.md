@@ -140,7 +140,12 @@ x509_extensions     = v3_req
 prompt              = no
 
 [req_distinguished_name]
-CN = <服务器域名>
+C = CN  # 国家代码
+ST = ShangHai  # 省份
+L = ShangHai   # 城市
+O = RuiShan  # 组织
+OU = Example CA  # 组织单位
+CN = My Root CA # 通用名称（CA名称）
 
 [req_ext]
 subjectAltName = @alt_names
@@ -152,8 +157,8 @@ extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = <服务器域名>
-IP.1 = <服务器IP>
+DNS.1 = #服务器域名 有则设置，没有则删除此行
+IP.1 = #服务器IP
 ```
 
 ```shell
