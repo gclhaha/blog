@@ -14,3 +14,5 @@
 ## 网站
 
 - [丰富、实战性非常强的NextJs教程，复刻各种顶级应用](https://www.codewithantonio.com/)
+- [小赖子的英国生活和咨询](https://justyy.com/)
+- [阮一峰的网络日志](https://www.ruanyifeng.com/blog/)
