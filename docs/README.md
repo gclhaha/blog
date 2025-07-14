@@ -123,6 +123,10 @@
 
 ## CheatSheet
 
+[Git 提交代码统计](./cheat-sheet/git-commit-stat.md)
+
+[Linux 磁盘空间检查与清理技巧](./cheat-sheet/linux-check-disk.md)
+
 [锐捷AC 交换机信号切换](./cheat-sheet/ruijie-ac-signal.md)
 
 [LDAP 常用命令](./cheat-sheet/ldap-command.md)
