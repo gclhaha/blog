@@ -123,6 +123,8 @@
 
 ## CheatSheet
 
+[K8s 常用命令](./cheat-sheet/k8s-command.md)
+
 [Git 提交代码统计](./cheat-sheet/git-commit-stat.md)
 
 [Linux 磁盘空间检查与清理技巧](./cheat-sheet/linux-check-disk.md)
@@ -139,7 +141,9 @@
 
 ## 随笔
 
-[3: LDAPS 认证流程](./eaasy/eassy-3.md)
+[4. 推流服务方案演进](./eaasy/eaasy-4.md)
+
+[3: LDAPS 认证流程](./eaasy/eaasy-3.md)
 
 [2：数据库初始化脚本与后端代码国际化方案](./eaasy/eaasy-2.md)
 
