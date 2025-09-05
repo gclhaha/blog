@@ -123,6 +123,8 @@
 
 ## CheatSheet
 
+[MongoDB 常用命令](./cheat-sheet/mongo-commad.md)
+
 [K8s 常用命令](./cheat-sheet/k8s-command.md)
 
 [Git 提交代码统计](./cheat-sheet/git-commit-stat.md)

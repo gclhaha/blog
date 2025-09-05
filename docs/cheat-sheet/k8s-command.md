@@ -14,6 +14,12 @@ kubectl delete -f <yaml文件>
 kubectl apply -f <yaml文件>
 ```
 
+重启pod
+
+```bash
+kubectl delete pod -n <namespace> <pod-name>
+```
+
 ## 信息查询
 
 ### 查看pod状态
@@ -51,3 +57,9 @@ kubectl logs -f --tail=500 -n <namespace> <pod-name>
 ```
 
 这里会展示pod的日志信息，`-f`表示跟踪日志输出，`--tail=500`表示只显示最后500行日志
+
+### 查看端口映射
+
+```bash
+kubectl get service -n <namespace>
+```
