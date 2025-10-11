@@ -39,7 +39,7 @@
 
 [Java JDK 包结构与内容简介](./java/packages.md)
 
-[Java类加载机制](./java/classload.md) todo
+[Java类加载机制](./java/classload.md)
 
 [Spring启动流程](/) todo
 
