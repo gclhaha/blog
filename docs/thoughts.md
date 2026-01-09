@@ -1,5 +1,7 @@
 # 短想法
 
+- 程序员对待 AI 有两种态度：一种以结果为导向，渴望通过 AI 更快拿到结果；另一种以过程为导向，他们从工程本身获得意义，对于被剥夺这种体验感到不满。-- Ben Werdmuller 这两种情况同时出现在我身上，最开始让AI完成了绝大部分工作，自己变成了需求说明人，代码不用我来写。但是在更大更难的需求中，需求整理、详细设计，为了保证AI的代码质量对其进行检查、手工修改、或者按照要求进行优化，工作流程的闭环。现在前一种状况占了主导。
+
 - Muss es sein？非如此不可？es muss sein！非如此不可！【不能承受的生命之轻（米兰·昆德拉）】
 
 - "Gather ye rosebuds while ye may. Then be not coy but use your time, and while ye may, go marry. For having lost but once your prime, you may forever tarry." 「花开堪折直须折。莫因娇羞惜爱怜，趁此春光嫁少年。等闲负了青春约，此生难再觅良缘。」【新闻编辑室 The Newsroom S1E09】 -2024.10.15
