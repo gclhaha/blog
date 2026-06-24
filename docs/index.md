@@ -31,4 +31,3 @@ outline: false
 
 - [互联网上的高质量内容](/sources)
 - [短想法](/thoughts)
-- [知识点总结](/learn)
