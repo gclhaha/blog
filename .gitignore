@@ -18,4 +18,5 @@ pnpm-debug.log*
 .temp
 .cache
 
-.vitepress/
+docs/.vitepress/dist
+docs/.vitepress/cache
