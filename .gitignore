@@ -17,3 +17,5 @@ pnpm-debug.log*
 .vscodenode_modules
 .temp
 .cache
+
+.vitepress/
