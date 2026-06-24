@@ -7,8 +7,7 @@ const nav = [
   { text: '构建', link: '/building/' },
   { text: 'AI', link: '/ai/' },
   { text: 'Apple', link: '/apple/' },
-  { text: '踩坑', link: '/bug/' },
-  { text: 'Bug地狱', link: '/bughell/' },
+  { text: '踩坑经历', link: '/bug/' },
   { text: 'CheatSheet', link: '/cheat-sheet/' },
   { text: '随笔', link: '/eaasy/' },
 ]
