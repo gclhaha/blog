@@ -5,7 +5,7 @@ outline: false
 
 # gclhaha的博客
 
-欢迎来到我的博客。这里主要记录 Java、Go、AI、构建实践，以及一些踩坑和随笔。
+欢迎来到我的博客。记录一些知识总结和实战踩坑。
 
 该博客托管在 [GitHub](https://github.com/gclhaha/blog) 中，使用 Vercel 部署。
 
