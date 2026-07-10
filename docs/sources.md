@@ -6,6 +6,7 @@
 - [显而易见的旅行建议](https://dynomight.net/travel/)
 - [如果你是CPU](https://cpu.land/)
 - [为什么没有更多人使用 Linux？](https://world.hey.com/dhh/why-don-t-more-people-use-linux-33b75f53)
+- [我在阅读任何代码之前运行的 Git 命令](https://piechowski.io/post/git-commands-before-reading-code/)
 
 ## 信息流
 
