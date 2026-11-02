@@ -2,7 +2,6 @@ import { defineConfig } from 'vitepress'
 
 const nav = [
   { text: '首页', link: '/' },
-  { text: '作品', link: '/products/' },
   { text: 'Java', link: '/java/' },
   { text: 'Golang', link: '/golang/' },
   { text: '构建', link: '/building/' },

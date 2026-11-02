@@ -23,7 +23,6 @@ outline: false
 
 ## 栏目导航
 
-- [作品](/products/)
 - [Java](/java/)
 - [Golang](/golang/)
 - [构建](/building/)
