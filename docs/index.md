@@ -16,8 +16,14 @@ outline: false
 - 邮箱：gclhaha#qq.com（把 # 换成 @）
 - GitHub：[@gclhaha](https://github.com/gclhaha)
 
+## 做的小工具
+
+- [起身](https://standup.gclhaha.top/) —— 久坐提醒，识别身体真的动起来计时才会走完
+- [囚徒健身记录](https://muscle.gclhaha.top/) —— 记录今天的训练，生成一张标出目标肌群的卡片
+
 ## 栏目导航
 
+- [作品](/products/)
 - [Java](/java/)
 - [Golang](/golang/)
 - [构建](/building/)

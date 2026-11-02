@@ -7,6 +7,7 @@
 - [如果你是CPU](https://cpu.land/)
 - [为什么没有更多人使用 Linux？](https://world.hey.com/dhh/why-don-t-more-people-use-linux-33b75f53)
 - [我在阅读任何代码之前运行的 Git 命令](https://piechowski.io/post/git-commands-before-reading-code/)
+- [职场人士如何积累财富](https://asheradeniyi.com/2026/04/10/how-to-build-wealth-as-a-career-person/) 要能够在组织内发挥作用，并能够不断沉淀工作成果。变得卓越的过程中，财富也会随之而来。
 
 ## 信息流
 
